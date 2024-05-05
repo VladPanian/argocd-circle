@@ -55,7 +55,6 @@ jobs:
           cluster-name: << parameters.cluster-name >>
           install-kubectl: false
           perform-login: true
-          resource-group: << parameters.resource-group >>
       - kubernetes/create-or-update-resource:
           resource-file-path: argocd/config.yaml
 
@@ -101,7 +100,6 @@ workflows:
             - docker/publish
       - argocd-configure:
           cluster-name: $CLUSTER_NAME
-          resource-group: $RESOURCE_GROUP
           requires:
             - bump-docker-tag-kustomize
       # Paste the following only when you opt for the ArgoCD manual-sync-policy:
