@@ -38,15 +38,11 @@ jobs:
       - run:
           name: Wait for application to reach a synced and healthy state
           command: argocd app wait $APP_NAME
-
-  argocd-configure:
-    steps:
-      - checkout
       - run:
           name: Pull Updated code from repo
           command: git pull origin $CIRCLE_BRANCH
       - kubernetes/create-or-update-resource:
-          resource-file-path: argocd/config.yaml
+
 
   bump-docker-tag-kustomize:
     docker:
@@ -88,10 +84,6 @@ workflows:
       - bump-docker-tag-kustomize:
           requires:
             - docker/publish
-      - argocd-configure:
-          cluster-name: $CLUSTER_NAME
-          requires:
-            - bump-docker-tag-kustomize
       # Paste the following only when you opt for the ArgoCD manual-sync-policy:
       - argocd-manual-sync:
           server: $ARGOCD_SERVER
