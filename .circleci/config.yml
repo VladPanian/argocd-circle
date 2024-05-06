@@ -75,7 +75,7 @@ workflows:
   Deploy-App-on-K8:
     jobs:
       - docker/publish:
-          image: docker.io/nodejs-argocd:latest
+          image: vpanian/nodejs-argocd
       - bump-docker-tag-kustomize:
           requires:
             - docker/publish
