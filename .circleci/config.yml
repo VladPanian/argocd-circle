@@ -76,7 +76,7 @@ workflows:
     jobs:
       - docker/publish:
           image: $DOCKER_LOGIN/$APP_NAME
-          tag: $CIRCLE_SHA1,latest
+          tag: latest
       - bump-docker-tag-kustomize:
           requires:
             - docker/publish
