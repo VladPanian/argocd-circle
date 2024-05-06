@@ -41,7 +41,6 @@ jobs:
       - run:
           name: Pull Updated code from repo
           command: git pull origin $CIRCLE_BRANCH
-      - kubernetes/create-or-update-resource:
 
 
   bump-docker-tag-kustomize:
@@ -89,5 +88,3 @@ workflows:
           server: $ARGOCD_SERVER
           username: $ARGOCD_USERNAME
           password: $ARGOCD_PASSWORD
-          requires:
-            - argocd-configure
