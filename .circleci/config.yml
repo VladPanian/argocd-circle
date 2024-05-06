@@ -67,6 +67,8 @@ jobs:
       - run:
           name: Commit & Push to GitHub
           command: |
+            git config  user.email "vpanian@outlook.com"
+            git config  user.name "VladPanian"
             git add manifests/kustomization.yaml
             git commit -am "Bumps docker tag [skip ci]"
             git push origin $CIRCLE_BRANCH
