@@ -76,7 +76,6 @@ workflows:
     jobs:
       - docker/publish:
           image: nodejs-argocd
-          tag: latest
       - bump-docker-tag-kustomize:
           requires:
             - docker/publish
