@@ -60,7 +60,7 @@ jobs:
           name: Bump Docker Tag
           command: |
             cd manifests
-            kustomize edit set image $APP_NAME=$DOCKER_LOGIN/testvlad:$CIRCLE_SHA1
+            kustomize edit set image $APP_NAME=$DOCKER_LOGIN/nodejs-argocd
       - add_ssh_keys:
           fingerprints:
             - "$SSH_FINGERPRINT"
