@@ -40,21 +40,11 @@ jobs:
           command: argocd app wait $APP_NAME
 
   argocd-configure:
-    executor: azure-aks/default
-    parameters:
-      cluster-name:
-        description: |
-          Name of the AKS cluster
-        type: string
     steps:
       - checkout
       - run:
           name: Pull Updated code from repo
           command: git pull origin $CIRCLE_BRANCH
-      - azure-aks/update-kubeconfig-with-credentials:
-          cluster-name: << parameters.cluster-name >>
-          install-kubectl: false
-          perform-login: true
       - kubernetes/create-or-update-resource:
           resource-file-path: argocd/config.yaml
 
@@ -90,7 +80,7 @@ jobs:
             git push origin $CIRCLE_BRANCH
 
 workflows:
-  Deploy-App-on-AKS:
+  Deploy-App-on-K8:
     jobs:
       - docker/publish:
           image: $DOCKER_LOGIN/$APP_NAME
@@ -109,4 +99,3 @@ workflows:
           password: $ARGOCD_PASSWORD
           requires:
             - argocd-configure
-
